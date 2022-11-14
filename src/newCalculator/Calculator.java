@@ -19,15 +19,17 @@ public class Calculator implements ActionListener{
 	static JLabel functionLabel,desplayLabel,operatorLabel;
 	static String labelText="0";
 	static Boolean isOperatorClicked=false;
+	static double num1=0;
+	static String tempClickedOperator="";
 	
 	
-	static Scanner sc=new Scanner(System.in);
-	static String operatorS="";
-	static double num1=0,num2=0,result=0;
-	static String oprtS="";
-	static double numb1=0,numb2=0,rslt=0;
-	static String[] arrMemory=new String[100];
-	static int arrLastPos=0;
+//	static Scanner sc=new Scanner(System.in);
+//	static String operatorS="";
+//	static double num1=0,num2=0,result=0;
+//	static String oprtS="";
+//	static double numb1=0,numb2=0,rslt=0;
+//	static String[] arrMemory=new String[100];
+//	static int arrLastPos=0;
 
 	
 	
@@ -36,6 +38,8 @@ public class Calculator implements ActionListener{
 		///	mainFunction();
 		
 		new Calculator();
+		
+	
 			
 	
 	}
@@ -281,14 +285,14 @@ public class Calculator implements ActionListener{
 
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	
-
-	static void mainFunction() {
-		preSetArrMemory();
-
-		
-		for(int i=1;i<2;i++) {
+//	
+//	
+//
+//	static void mainFunction() {
+//		preSetArrMemory();
+//
+//		
+//		for(int i=1;i<2;i++) {
 //			if(numb1==0) {
 //				numb1=fNum1();  
 //				String sNumb1=String.valueOf(numb1);
@@ -296,37 +300,37 @@ public class Calculator implements ActionListener{
 //			}else {
 //				//somthing
 //			}
-			String oprtS=fOperator();     
-				String sOprt=String.valueOf(oprtS);  
-				addArrMemory(sOprt);
-			if(oprtS.equals("=")) {
-				//somthimg
-			}else {
-				numb2=fNum2();      
-					String sNumb2=String.valueOf(numb2);
-					addArrMemory(sNumb2);
-				rslt=fResult(numb1, oprtS, numb2);
-				fDesplay(rslt);      
-					String sRslt=String.valueOf(rslt);  
-					addArrMemory(sRslt);
-			}
-			numb1=rslt;
-			i=i-1;
-			readArrMemory();
-		}
-	
-	}
-
-
-
-
-
-	private static void preSetArrMemory() {
-		for(int i=0;i<20;i++) {
-			 arrMemory[i]="dummy";
-		}
-	}
-
+//			String oprtS=fOperator();     
+//				String sOprt=String.valueOf(oprtS);  
+//				addArrMemory(sOprt);
+//			if(oprtS.equals("=")) {
+//				//somthimg
+//			}else {
+//				numb2=fNum2();      
+//					String sNumb2=String.valueOf(numb2);
+//					addArrMemory(sNumb2);
+//				rslt=fResult(numb1, oprtS, numb2);
+//				fDesplay(rslt);      
+//					String sRslt=String.valueOf(rslt);  
+//					addArrMemory(sRslt);
+//			}
+//			numb1=rslt;
+//			i=i-1;
+//			readArrMemory();
+//		}
+//	
+//	}
+//
+//
+//
+//
+//
+//	private static void preSetArrMemory() {
+//		for(int i=0;i<20;i++) {
+//			 arrMemory[i]="dummy";
+//		}
+//	}
+//
 //	static double fNum1() {
 //		if(num1==0) {
 //		System.out.println("Enter a first number");
@@ -337,116 +341,116 @@ public class Calculator implements ActionListener{
 //		}
 //		return num1;
 //	}
-	
-	static String fOperator() {
-		for(int i=1;i<2;i++) {
-		System.out.println("Enter a Operator@");
-		operatorS=sc.next().toString();
-		if(operatorS.equals("=")||operatorS.equals("+")||operatorS.equals("-")||operatorS.equals("*")||operatorS.equals("/")||operatorS.equals("%")) {
-				if(operatorS.equals("=")) {
-						String sOperator=String.valueOf(operatorS);  
-						addArrMemory(sOperator);
-					numb2=0;          
-						String sNumb2=String.valueOf(numb2);
-						addArrMemory(sNumb2);
-					rslt=numb1+numb2;  //  (numb1 value+numb2 0)
-					fDesplay(rslt);   
-						String sRslt=String.valueOf(rslt);
-						addArrMemory(sRslt);
-				}else if(operatorS.equals("%")){
-					rslt=numb1/100;
-					fDesplay(rslt);
-						String sRslt=String.valueOf(rslt);
-						addArrMemory(sRslt);
-				}else {
-					
-				}
-		}else {
-			System.out.println("invalid operator@");
-			i=i-1;
-		}
-		}
-		return operatorS;
-	}
-	
-	static double fNum2() {
-		System.out.println("Enter a second number");
-		String num2S=sc.next().toString();
-		num2=Double.parseDouble(num2S);
-		return num2;
-	}
-	
-	static double fResult(double numbr1, String oprtrS, double numbr2) {
-		double rsltOprton=0;
-		System.out.println("Enter a Operator#");
-		operatorS=sc.next().toString();
-		if(operatorS.equals("=")) {
-				String sOperator=String.valueOf(operatorS);  
-				addArrMemory(sOperator);
-			rsltOprton=fOperation(numbr1,oprtrS,numbr2);
-		}else if(operatorS.equals("+")||operatorS.equals("-")||operatorS.equals("*")||operatorS.equals("/")){
-			rsltOprton=fOperation(numbr1,oprtrS,numbr2);
-		}else if(operatorS.equals("%")){
-				String sOperator=String.valueOf(operatorS);  
-				addArrMemory(sOperator);
-			rsltOprton=fPercentage(numbr1,oprtrS,numbr2);//rsltOprton*100;
-		}else {
-			System.out.println("invalid operator#");
-		}
-	return rsltOprton; 
-}
-
-	static double fOperation(double numbr1, String oprtrS, double numbr2) {
-			if(oprtrS.equals("+")) {
-			 result=numbr1+numbr2;
-			}else if(oprtrS.equals("-")) {
-				result=numbr1-numbr2;
-			}else if(oprtrS.equals("*")) {
-				result=numbr1*numbr2;
-			}else if(oprtrS.equals("/")) {
-				result=numbr1/numbr2;
-			}else {
-				//System.out.println("invalid operator");
-			}
-		return result;  
-	}
-	
-	static double fPercentage(double numbr1, String oprtrS, double numbr2){double preResult=0;
-		if(oprtrS.equals("+")) {
-			 	result=numbr1+(numbr2/100);
-			}else if(oprtrS.equals("-")) {
-				result=numbr1-(numbr2/100);
-			}else if(oprtrS.equals("*")) {
-				result=numbr1*(numbr2/100);
-			}else if(oprtrS.equals("/")) {
-				result=numbr1/(numbr2/100);
-			}else {
-				//System.out.println("invalid operator");
-			}
-		return result;  
-	}
-
-	static void fDesplay(double rsult) {
-		System.out.println(rsult);
-	}
-
-	static void addArrMemory(String addValeuS){
-		  arrMemory[arrLastPos]=addValeuS; arrLastPos=arrLastPos+1;     /////////////////
-	}
-	
-	static void readArrMemory() {
-		String mergeValueS="";
-		for(int i=0;i<20;i++) {
-		String readValueS=arrMemory[i];
-		if(readValueS.equals("dummy")) {
-			//somthing
-		}else {
-			
-			mergeValueS=mergeValueS+readValueS;
-		}
-		}
-		System.out.println(mergeValueS);
-	}
+//	
+//	static String fOperator() {
+//		for(int i=1;i<2;i++) {
+//		System.out.println("Enter a Operator@");
+//		operatorS=sc.next().toString();
+//		if(operatorS.equals("=")||operatorS.equals("+")||operatorS.equals("-")||operatorS.equals("*")||operatorS.equals("/")||operatorS.equals("%")) {
+//				if(operatorS.equals("=")) {
+//						String sOperator=String.valueOf(operatorS);  
+//						addArrMemory(sOperator);
+//					numb2=0;          
+//						String sNumb2=String.valueOf(numb2);
+//						addArrMemory(sNumb2);
+//					rslt=numb1+numb2;  //  (numb1 value+numb2 0)
+//					fDesplay(rslt);   
+//						String sRslt=String.valueOf(rslt);
+//						addArrMemory(sRslt);
+//				}else if(operatorS.equals("%")){
+//					rslt=numb1/100;
+//					fDesplay(rslt);
+//						String sRslt=String.valueOf(rslt);
+//						addArrMemory(sRslt);
+//				}else {
+//					
+//				}
+//		}else {
+//			System.out.println("invalid operator@");
+//			i=i-1;
+//		}
+//		}
+//		return operatorS;
+//	}
+//	
+//	static double fNum2() {
+//		System.out.println("Enter a second number");
+//		String num2S=sc.next().toString();
+//		num2=Double.parseDouble(num2S);
+//		return num2;
+//	}
+//	
+//	static double fResult(double numbr1, String oprtrS, double numbr2) {
+//		double rsltOprton=0;
+//		System.out.println("Enter a Operator#");
+//		operatorS=sc.next().toString();
+//		if(operatorS.equals("=")) {
+//				String sOperator=String.valueOf(operatorS);  
+//				addArrMemory(sOperator);
+//			rsltOprton=fOperation(numbr1,oprtrS,numbr2);
+//		}else if(operatorS.equals("+")||operatorS.equals("-")||operatorS.equals("*")||operatorS.equals("/")){
+//			rsltOprton=fOperation(numbr1,oprtrS,numbr2);
+//		}else if(operatorS.equals("%")){
+//				String sOperator=String.valueOf(operatorS);  
+//				addArrMemory(sOperator);
+//			rsltOprton=fPercentage(numbr1,oprtrS,numbr2);//rsltOprton*100;
+//		}else {
+//			System.out.println("invalid operator#");
+//		}
+//	return rsltOprton; 
+//}
+//
+//	static double fOperation(double numbr1, String oprtrS, double numbr2) {
+//			if(oprtrS.equals("+")) {
+//			 result=numbr1+numbr2;
+//			}else if(oprtrS.equals("-")) {
+//				result=numbr1-numbr2;
+//			}else if(oprtrS.equals("*")) {
+//				result=numbr1*numbr2;
+//			}else if(oprtrS.equals("/")) {
+//				result=numbr1/numbr2;
+//			}else {
+//				//System.out.println("invalid operator");
+//			}
+//		return result;  
+//	}
+//	
+//	static double fPercentage(double numbr1, String oprtrS, double numbr2){double preResult=0;
+//		if(oprtrS.equals("+")) {
+//			 	result=numbr1+(numbr2/100);
+//			}else if(oprtrS.equals("-")) {
+//				result=numbr1-(numbr2/100);
+//			}else if(oprtrS.equals("*")) {
+//				result=numbr1*(numbr2/100);
+//			}else if(oprtrS.equals("/")) {
+//				result=numbr1/(numbr2/100);
+//			}else {
+//				//System.out.println("invalid operator");
+//			}
+//		return result;  
+//	}
+//
+//	static void fDesplay(double rsult) {
+//		System.out.println(rsult);
+//	}
+//
+//	static void addArrMemory(String addValeuS){
+//		  arrMemory[arrLastPos]=addValeuS; arrLastPos=arrLastPos+1;     /////////////////
+//	}
+//	
+//	static void readArrMemory() {
+//		String mergeValueS="";
+//		for(int i=0;i<20;i++) {
+//		String readValueS=arrMemory[i];
+//		if(readValueS.equals("dummy")) {
+//			//somthing
+//		}else {
+//			
+//			mergeValueS=mergeValueS+readValueS;
+//		}
+//		}
+//		System.out.println(mergeValueS);
+//	}
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -460,41 +464,43 @@ public class Calculator implements ActionListener{
 		//jf.getContentPane().setBackground(Color.blue);
 		
 		if(e.getSource()== oneButton) {
-			fSetLabelText("1");
+			fSetLabelText("1","num");
 		}else if(e.getSource()== twoButton) {
-			fSetLabelText("2");
+			fSetLabelText("2","num");
 		}else if(e.getSource()== threeButton) {
-			fSetLabelText("3");
+			fSetLabelText("3","num");
 		}else if(e.getSource()== fourButton) {
-			fSetLabelText("4");
+			fSetLabelText("4","num");
 		}else if(e.getSource()== fiveButton) {
-			fSetLabelText("5");
+			fSetLabelText("5","num");
 		}else if(e.getSource()== sixButton) {
-			fSetLabelText("6");
+			fSetLabelText("6","num");
 		}else if(e.getSource()== sevenButton) {
-			fSetLabelText("7");
+			fSetLabelText("7","num");
 		}else if(e.getSource()== eightButton) {
-			fSetLabelText("8");
+			fSetLabelText("8","num");
 		}else if(e.getSource()== nineButton) {
-			fSetLabelText("9");
+			fSetLabelText("9","num");
 		}else if(e.getSource()== zeroButton) {
-			fSetLabelText("0");
+			fSetLabelText("0","num");
 		}else if(e.getSource()== dotButton) {
-			fSetLabelText(".");
+			fSetLabelText(".","num");
 		}else if(e.getSource()== ceButton) {
-			fSetLabelText("ce");
+			fSetLabelText("ce","opr");
 		}else if(e.getSource()== acButton) {
-			fSetLabelText("ac");
+			fSetLabelText("ac","opr");
 		}else if(e.getSource()== percentageButton) {
-			fSetLabelText("%");
+			fSetLabelText("%","opr");
 		}else if(e.getSource()== divideButton) {
-			fSetLabelText("/");
+			fSetLabelText("/","opr");
 		}else if(e.getSource()== multyButton) {
-			fSetLabelText("x");
+			fSetLabelText("x","opr");
 		}else if(e.getSource()== substractButton) {
-			fSetLabelText("-");
+			fSetLabelText("-","opr");
 		}else if(e.getSource()== additionButton) {
-			fSetLabelText("+");
+			fSetLabelText("+","opr");
+		}else if(e.getSource()== equalButton) {
+			fSetLabelText("=","opr");
 		}else {
 			
 		}
@@ -502,51 +508,109 @@ public class Calculator implements ActionListener{
 	}
 	
 	
-	void fSetLabelText(String buttonValue) {
-		if(buttonValue.equals("ce")||buttonValue.equals("ac")||buttonValue.equals("%")||buttonValue.equals("/")||buttonValue.equals("x")||buttonValue.equals("-")||buttonValue.equals("+")) {
+	void fSetLabelText(String buttonValue, String buttonType) {
+		if(buttonType=="opr"/*buttonValue.equals("ce")||buttonValue.equals("ac")||buttonValue.equals("%")||buttonValue.equals("/")||buttonValue.equals("x")||buttonValue.equals("-")||buttonValue.equals("+")*/) {
 			if(buttonValue.equals("ce")||buttonValue.equals("ac")) {
-			
+				desplayLabel.setText("0");
 			}else {
-				/**/
-				if(numb1==0) {
-					numb1=fNum1();  
-					String sNumb1=String.valueOf(numb1);
-					addArrMemory(sNumb1);
-					System.out.println(numb1);
+				isOperatorClicked=true;
+				System.out.println("true");
+				if(buttonValue=="=") {
+					equalResult();
+				}else if(buttonValue=="%") {
+					percentageResult();
 				}else {
-					//somthing
+					num1=Double.parseDouble(desplayLabel.getText());
+					tempClickedOperator=buttonValue;
 				}
-				/**/
 			}
-			desplayLabel.setText("0");
-		}else {
+			//desplayLabel.setText("0");
+		}else if(buttonType=="num"){
+			if(isOperatorClicked==true) {
+				desplayLabel.setText("");
+				isOperatorClicked=false;
+				System.out.println("false");
+			}else {
+			}
 			String desplayValueS=desplayLabel.getText();
 			if(desplayValueS.equals("0")) {
 			desplayLabel.setText(buttonValue);
 			}else {
 			desplayLabel.setText(desplayValueS+buttonValue);
 			}
-		}
-	}
-
-
-
-
-	
-	
-	
-	static double fNum1() {
-		if(num1==0) {
-		String num1S=desplayLabel.getText();
-		num1=Double.parseDouble(num1S);
 		}else {
-			num1=result;
+			
 		}
-		return num1;
 	}
+
 	
 	
+
+
+
 	
+
+
+
+
+
+
+
+
+
+
+
+
+	private void equalResult() {
+			if(tempClickedOperator=="") {
+			num1=Double.parseDouble(desplayLabel.getText());
+			desplayResult(String.valueOf(num1));
+		}else if(tempClickedOperator=="+"){
+			desplayResult(String.valueOf(num1+currentValue()));
+		}else if(tempClickedOperator=="-"){
+			desplayResult(String.valueOf(num1-currentValue()));
+		}else if(tempClickedOperator=="x"){
+			desplayResult(String.valueOf(num1*currentValue()));
+		}else if(tempClickedOperator=="/"){
+			desplayResult(String.valueOf(num1/currentValue()));
+		}else {
+		}
+	}
+
+	static void percentageResult() {
+		if(tempClickedOperator=="") {
+			num1=Double.parseDouble(desplayLabel.getText());
+			desplayResult(String.valueOf(num1/100));
+		}else if(tempClickedOperator=="+"){
+			desplayResult(String.valueOf(num1+(currentValue())/100));
+		}else if(tempClickedOperator=="-"){
+			desplayResult(String.valueOf(num1-(currentValue())/100));
+		}else if(tempClickedOperator=="x"){
+			desplayResult(String.valueOf(num1*(currentValue())/100));
+		}else if(tempClickedOperator=="/"){
+			desplayResult(String.valueOf((num1/currentValue())*100));
+		}else {
+		}
+	}
+
+	static double currentValue() {
+		double cValue=Double.parseDouble(desplayLabel.getText());
+		return cValue;
+	}
+
+	static void desplayResult(String resultS) {       /// int  or  double   and desplay
+		double resultD=Double.parseDouble(resultS);  /// 9.8
+		int resultI=(int)resultD;                     /// 9
+		double d=(double)resultI;                     /// 9.0
+		double rd=resultD-d;                         /// 0.8
+		if(rd==0) {                                /// 0.8==0.0 ?$
+			desplayLabel.setText(String.valueOf(resultI));    ///9.0   /// 9
+		}else {                                       /// 0.8==0.0 ?x
+			desplayLabel.setText(resultS);              /// 9.8
+		}
+		num1=resultD;
+	}
+
 	
 	
 	
